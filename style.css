@@ -1,0 +1,313 @@
+:root {
+    --index-primary-bgc: #0a0908; /* black */
+    --index-alt-bgc: #191919; /* gunmetal */
+    --index-primary-font: #f8f9fa; /* white */
+    --index-primary-header: #1E90FF; /* dodger blue */
+    --index-primary-header-hover: #b4cee7; /* grey blue */
+    --index-alt-font: #ffff3f; /* highlighter yellow */
+    --index-alt-font-hover: #fafac1; /* grey yellow */
+    --index-primary-borders: #720026; /* dark red */
+    --outline:  #71706e; /* dark silver */
+
+    --prex-primary-bgc: #212529;
+}
+/* Classes & IDs */
+#yellow {
+  color: var(--index-alt-font);
+}
+
+.hidden {
+  display: none;
+}
+
+.breadcrumbs {
+  font-size: 18px;
+
+  a {
+    color: var(--index-alt-font);
+
+    &:hover {
+      color: var(--index-alt-font-hover);
+    }
+  }
+}
+
+/* Pages */
+#index {
+    background: linear-gradient(135deg, #00000055 25%, transparent 25%) -40px 0/ 80px 80px, linear-gradient(225deg, #000000 25%, transparent 25%) -40px 0/ 80px 80px, linear-gradient(315deg, #00000055 25%, transparent 25%) 0px 0/ 80px 80px, linear-gradient(45deg, #000000 25%, #191919 25%) 0px 0/ 80px 80px;
+    text-align: center;
+    font-family: "Raleway", sans-serif;
+    font-size: 32px;
+    color: var(--index-primary-font);
+
+    header {
+        h1, a{
+            color: var(--index-primary-header);
+            text-decoration: none;
+            font-size: 64px;
+            margin-top: 3%;
+
+            &:hover {
+                color: var(--index-primary-header-hover);
+            }
+        }
+        p {
+            color: #9f86c0;
+        }
+    }
+
+    .cont-btn {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+
+        margin-left: 25%;
+        margin-right: 25%;
+        margin-top: 3%;
+        margin-bottom: 3%;
+
+        .btn {
+            padding-left: 3%;
+            padding-right: 3%;
+            background-color: #191919;
+            background-image:  repeating-radial-gradient( circle at 0 0, transparent 0, #191919 40px ), repeating-linear-gradient( #00000055, #000000 );
+            border-radius: 5%;
+            border: 25px var(--index-primary-bgc) solid;
+            outline: 5px var(--outline) solid;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.45);
+
+            p, a {
+                color: var(--index-alt-font);
+                font-size: 64px;
+                text-decoration: none;
+
+                &:hover {
+                    color: var(--index-alt-font-hover);
+                }
+            }
+        }
+
+        svg {
+            height: 150px;
+            width: 150px;
+            fill: var(--index-primary-font);
+        }
+    }
+
+    /* Index Media Queries */
+    @media (max-width: 1600px) {
+        .cont-btn {
+            justify-content: center;
+            gap: 3rem;
+        }
+    }
+
+  @media (max-width: 1200px) {
+    .cont-btn {
+      flex-wrap: wrap;
+      justify-content: center;
+      margin: 3% 10%;
+      gap: 2.5rem;
+    }
+  }
+
+  @media (max-width: 768px) {
+    font-size: 22px;
+
+    header {
+      h1,
+      a {
+        font-size: 48px;
+      }
+    }
+
+    .cont-btn {
+      flex-direction: column;
+      margin: 3% 8%;
+      gap: 2rem;
+
+      .btn {
+        border-width: 16px;
+      }
+
+      svg {
+        width: 110px;
+        height: 110px;
+      }
+    }
+  }
+
+  @media (max-width: 480px) {
+    font-size: 18px;
+
+    header {
+      h1,
+      a {
+        font-size: 36px;
+      }
+    }
+
+    .cont-btn {
+      margin: 3% 5%;
+      gap: 1.5rem;
+
+      .btn {
+        border-width: 12px;
+
+        p,
+        a {
+          font-size: 32px;
+        }
+      }
+
+      svg {
+        width: 80px;
+        height: 80px;
+      }
+    }
+  }
+}
+
+#prex {
+  background: linear-gradient(135deg, #00000055 25%, transparent 25%) -40px 0/ 80px 80px, linear-gradient(225deg, #000000 25%, transparent 25%) -40px 0/ 80px 80px, linear-gradient(315deg, #00000055 25%, transparent 25%) 0px 0/ 80px 80px, linear-gradient(45deg, #000000 25%, #191919 25%) 0px 0/ 80px 80px;
+  text-align: center;
+  font-family: "Raleway", sans-serif;
+  font-size: 32px;
+
+  button {
+    padding: 1em;
+    background-image: repeating-radial-gradient( circle at 0 0, transparent 0, #191919 40px ), repeating-linear-gradient( #00000055, #000000 );
+    border-radius: 15%;
+    border-color: var(--index-primary-font);
+    color: var(--index-primary-font);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.45);
+    font-size: 18px;
+  }
+
+  .list-div {
+    background: linear-gradient(135deg, #2b2b2b 0%, #4a4a4a 45%, #8a8a8a 100%);
+    color: var(--index-primary-font);
+    padding-bottom: 5%;
+    padding-left: 3px;
+    padding-right: 3px;
+    padding-top: 1%;
+    margin-left: 15%;
+    margin-right: 15%;
+    margin-top: 2%;
+    border-radius: 3%;
+    overflow-x:scroll;
+
+    border: 15px var(--index-primary-bgc) solid;
+    outline: 5px var(--outline) solid;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.45);
+    font-size: 24px;
+    
+    h2 {
+      font-size: 30px;
+    }
+
+    pre code {
+      overflow-x:scroll;
+    }
+
+    ul {
+      padding: 0;
+      margin: 0 auto;
+      list-style-position: inside;
+      
+      li {
+        list-style: none;
+        font-size: 24px;
+
+        a {
+          color: var(--index-alt-font);
+
+          &:hover {
+            color: var(--index-alt-font-hover);
+          }
+        }
+      }
+    }
+  }
+
+  header {
+        h1 a{
+            color: var(--index-primary-header);
+            text-decoration: none;
+            font-size: 64px;
+            margin-top: 3%;
+
+            &:hover {
+                color: var(--index-primary-header-hover);
+            }
+        }
+      p {
+          color: #9f86c0;
+        }
+    }
+
+  footer {
+    color: var(--index-primary-font);
+  }
+
+  /* Project/Exercise Media Queries */
+  @media (max-width: 768px) {
+    .list-div {
+      margin: 0;
+      padding: 0;
+    }
+  }
+}
+
+#scoundrel {
+  background: linear-gradient(135deg, #00000055 25%, transparent 25%) -40px 0/ 80px 80px, linear-gradient(225deg, #000000 25%, transparent 25%) -40px 0/ 80px 80px, linear-gradient(315deg, #00000055 25%, transparent 25%) 0px 0/ 80px 80px, linear-gradient(45deg, #000000 25%, #191919 25%) 0px 0/ 80px 80px;
+  text-align: center;
+  font-family: "Raleway", sans-serif;
+  font-size: 32px;
+  color: var(--index-primary-font);
+
+  nav a {
+      color: var(--index-alt-font);
+
+      &:hover {
+        color: var(--index-alt-font-hover);
+        }
+    }
+
+  button {
+        padding: 1em;
+        background-image: repeating-radial-gradient( circle at 0 0, transparent 0, #191919 40px ), repeating-linear-gradient( #00000055, #000000 );
+        border-radius: 15%;
+        border-color: var(--index-primary-font);
+        color: var(--index-primary-font);
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.45);
+        font-size: 18px;
+    }
+
+  .cont {
+    display: flex;
+    gap: 10%;
+    margin-left: 5%;
+    margin-right: 5%;
+
+    p {
+      margin-left: 5%;
+      margin-right: 5%;
+    }
+
+      h1 {
+        font-size: 128px;
+        letter-spacing: 0.2em;
+        color: var(--index-primary-header);
+      }
+
+      @media (max-width: 2154px) {
+        display: inline-block;
+        text-align: center;
+        h1 {
+          font-size: 64px;
+          letter-spacing: 0;
+        }
+      }
+  }
+}

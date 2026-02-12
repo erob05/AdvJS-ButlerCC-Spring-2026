@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>M02: Page About Scripts</title>
+    <link rel="stylesheet" href="../../style.css">
+
+    <!--Font Embed-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway&display=swap" rel="stylesheet">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="../../images/house-fontawesome.ico">
+
+    <!-- Code Plugin -->
+    <link href="https://cdn.jsdelivr.net/npm/prismjs/themes/prism.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/prismjs/prism.js"></script>
+
+    <!-- jQuery -->
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+</head>
+<body id="prex">
+    <header>
+        <h1><a href="../../index.html">Eric's Advanced Web Scripting Workspace</a></h1>
+        <p>Butler Community College Spring 2026</p>
+        <p class="breadcrumbs"><a href="../../project.html">Back to projects</a></p>
+    </header>
+    <main>
+        <div class="list-div">
+            <h2>Node Scripts Explanation</h2>
+            <p>To check if it works, navigate to this directory in your command prompt.</p>
+            <pre><code>cd ...\eroberts_site\projects\eroberts_scripts\node-scripts</code></pre>
+            <p>And type:</p>
+            <pre><code>node index.js</code></pre>
+            <p>The desired output:</p>
+            <pre><code>=== Magical Worlds Defense ===
+Aligning chakras...
+Mordor status: Danger, invasion!
+Sword Coast status: Danger, invasion!
+Mushroom Kingdom status: Danger, invasion!
+Midgar status: Danger, invasion!
+Hyrule status: Danger, invasion!
+Casted fireball! Boooom! Huge explosion!
+You saved Midgar!
+=== Magical Worlds Defense ===</code></pre>
+            <button id="toggleBtn">Show Explanation</button>
+            <div id="explanation" class="hidden">
+                <p>
+                    So, the first file for this script is message.js. In here, I created a simple function that just passes a parameter to the console.
+                </p>
+                    <pre><code class="language-js">function narrate(message) {
+    console.log(`${message}`);
+}</code></pre>
+                <p>Then all I had to do was export it so I can use it on other files. At first I ran into a little hiccup when I tried exporting narrate() instead of just narrate. I also export every single script except index.js.</p>
+                <pre><code class="language-js">module.exports = narrate;</code></pre>   
+                <p>After that I made function.js. It has this function with lots of switch cases. It can cast different spells which result in different string outcomes depending on the parameter you pass with the function.</p>
+                <pre><code class="language-js">function spellCast(spell) {
+    switch (spell) {
+        case "fireball":
+            console.log("Casted fireball! Boooom! Huge explosion!");
+            console.log("You saved Midgar!")
+            break;
+        
+        case "heal":
+            console.log("Casted heal. You're feeling those healing energies!");
+            console.log("You saved the Mushroom Kingdom!");
+            break;
+
+        case "spark":
+            console.log("Casted sparks! Zzzzzap!");
+            console.log("You saved Hyrule!");
+            break;
+        
+        default:
+            console.log("The spell backfired. You suck.");
+            console.log("You saved Mordor!");
+            break;
+    }
+}</code></pre>
+            <p>Then I made loop.js. It parses through an array called regions that is filled with strings. Then, depending on the parameter passed with the function, it will pass different string outcomes. To do this, I used a conditional statement.</p>
+            <pre><code class="language-js">function runMagicalScan(state) {
+    const regions = ['Mordor', 'Sword Coast', 'Mushroom Kingdom', 'Midgar', 'Hyrule'];
+
+    for (let i=0; i < regions.length; i++) {
+        const safety = state === "safe" ? "Safe and secure." : "Danger, invasion!";
+        console.log(`${regions[i]} status: ${safety}`)
+    }
+}</code></pre>
+            <p>Finally, index.js calls in the functions we made in past files and uses them to help digital magical worlds defend against evil.</p>
+            <pre><code class="language-js">const narrate = require("./message");
+const spellCast = require("./function");
+const runMagicalScan = require("./loop");
+
+narrate("=== Magical Worlds Defense ===");
+narrate("Aligning chakras...");
+runMagicalScan("danger");
+spellCast("fireball");
+narrate("=== Magical Worlds Defense ===");</code></pre>
+                <p>I had fun making this. JavaScript makes a lot more sense than other programming languages I've tried. Try casting other spells to save different regions.</p>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; Eric Roberts 2026</p>
+    </footer>
+    
+    <script src="script.js"></script>
+</body>
+</html>

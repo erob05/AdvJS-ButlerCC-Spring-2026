@@ -1,0 +1,3 @@
+We've made a triangle. Side A is 4 inches long. Side B is 8 inches long.
+This means that Side C needs to be about 8.94 inches long.
+ -E Roberts
