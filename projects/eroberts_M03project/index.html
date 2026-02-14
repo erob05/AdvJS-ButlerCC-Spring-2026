@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>M03: Entering Parameters to Node.js</title>
+    <link rel="stylesheet" href="../../style.css">
+
+    <!--Font Embed-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway&display=swap" rel="stylesheet">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="../../images/house-fontawesome.ico">
+
+    <!-- Code Plugin -->
+    <link href="https://cdn.jsdelivr.net/npm/prismjs/themes/prism.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/prismjs/prism.js"></script>
+</head>
+<body id="prex">
+    <header>
+        <h1><a href="../../index.html">Eric's Advanced Web Scripting Workspace</a></h1>
+        <p>Butler Community College Spring 2026</p>
+        <p class="breadcrumbs"><a href="../../project.html">Back to projects</a></p>
+    </header>
+    <main>
+        <div class="list-div">
+            <h2>Entering Parameters to Node.js</h2>
+            <p>To check if it works, navigate to this directory in your command prompt.</p>
+            <pre><code>...\eroberts_site\AdvJS-ButlerCC-Spring-2026\projects\eroberts_M03project</code></pre>
+            <p>And type:</p>
+            <pre><code>node index.js</code></pre>
+            <p>The desired output:</p>
+            <pre><code>Error: Invalid number of parameters.
+The multiverse is in great danger.
+Choose a region to save and your weapon.
+Parameters:
+ &lt;world&gt; - Your first choice: 'The Shire' or 'Hogwarts'.
+ &lt;weapon&gt; - Your second choice: 'Lightsaber' or 'Death Note'.</code></pre>
+                <p>
+                    From here, you can choose from those choices and have different outputs appear in a text file. Here are the first lines of code:
+                </p>
+                    <pre><code class="language-js">"use strict"
+const fs = require('fs');
+</code></pre>
+                <p>"Use strict" helps catch some common mistakes and builds good practice. The second line imports the file system module and stores it in a variable called "fs" for future use.</p>
+                <pre><code class="language-js">const args = process.argv.slice(2);</code></pre>   
+                <p>This creates a variable called "args" and assigns to "process.argv" which is an array in Node.js that contains the command-line arguments we will need to run the code. The first
+                    two elements are the path to Node and the path to my script. ".slice(2)" removes those first two items so I don't have to worry about it.
+                </p>
+                <pre><code class="language-js">function intro() {
+    console.log("The multiverse is in great danger.");
+    console.log("Choose a region to save and your weapon.");
+    console.log("Parameters:");
+    console.log(" <world> - Your first choice: 'The Shire' or 'Hogwarts'.");
+    console.log(" <weapon> - Your second choice: 'Lightsaber' or 'Death Note'.");
+}
+
+// Quick check
+if (args.length < 2 ) {
+    console.log("Error: Invalid number of parameters.");
+    intro();
+    process.exit(1);
+}
+</code></pre>
+            <p>Then I made the first function, "intro()" followed by a quick check to see if there has been at least two arguments entered. The first function is just filled with "console.logs" to
+                create the story. The output of this is what you will first see when you run "node index.js".
+            </p>
+            <pre><code class="language-js">let weapon = "";
+let world = "";
+
+const lastTwo = args.slice(-2).join(" ").toLowerCase();
+if (lastTwo === "death note") {
+    weapon = "Death Note";
+    world = args.slice(0, -2).join(" ");
+} else {
+    weapon = args[args.length - 1];
+    world = args.slice(0, -1).join(" ");
+}
+</code></pre>
+            <p>I had to figure out a way to separate the command line inputs into a weapon and world variable. So, I set this up: It checks if the last two words are "death note". If so, it sets weapon to "Death Note" and treats everything before it as the world. Otherwise, it assumes the weapon is just the last word.</p>
+            <pre><code class="language-js">const worldLower = world.toLowerCase();
+const weaponLower = weapon.toLowerCase();
+
+const validWorlds = ["the shire", "hogwarts"];
+const validWeapons = ["lightsaber", "death note"];
+
+if (!validWorlds.includes(worldLower)) {
+    console.log(`Error: Invalid world '${world}'.\n`);
+    intro();
+    process.exit(1);
+}
+
+if (!validWeapons.includes(weaponLower)) {
+    console.log(`Error: Invalid weapon '${weapon}'.\n`);
+    intro();
+    process.exit(1);
+}</code></pre>
+            <p>
+                For this, I figured the best way would be to convert the inputs into all lowercase so it isn't case sensitive. Then, it checks whether they match the validWeapons and validWorlds arrays using .includes(). If either value isn't valid, it just calls the intro function and exits.
+            </p>
+            <pre><code class="language-js">let story = `You blast through a portal sending you to ${world} wielding your ${weapon}. \n`;
+
+if (worldLower === "the shire" && weaponLower === "lightsaber") {
+    story += "Gandalf joins you as you battle an army of the Sith! You saved the Shire!";
+} else if (worldLower === "the shire" && weaponLower === "death note") {
+    story+= "Frodo looks nervous as you write names in the Death Note! You realize you don't know Sauron's last name. The Shire is lost to the dark forces...";
+} else if (worldLower === "hogwarts" && weaponLower === "lightsaber") {
+    story += "Dumbledore trains you in magical wizard lightsaber combat! It's not enough as Voldemort just Avada Kedavra's you. Hogwarts is lost to the dark forces...";
+} else if (worldLower === "hogwarts" && weaponLower === "death note") {
+    story += "Everyone is terrified by your notebook of doom. You write Voldemort's name swiftly putting an end to the war. You saved Hogwarts!"
+}
+</code></pre>
+            <p>
+                Here's the main logic part of the script. It's basically checking which parameters you wrote and giving you an outcome of the story based off that.
+            </p>
+            <pre><code class="language-js">const outputFile = "adventure.result.txt";
+fs.writeFile(outputFile, story, err => {
+    if (err) {
+        console.error("Error writing file:", err);
+        return;
+    }
+    console.log(`\nYour adventure has been saved to '${outputFile}'!`);
+
+    const message = fs.readFileSync(outputFile, 'utf8');
+    console.log(message);
+});</code></pre>
+            <p>
+                Finally, the code checks if there's any errors, if not then it outputs to a .txt file. Then the code reads the .txt file and outputs that as a message in the console as well.
+            </p>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; Eric Roberts 2026</p>
+    </footer>
+    
+    <script src="script.js"></script>
+</body>
+</html>
