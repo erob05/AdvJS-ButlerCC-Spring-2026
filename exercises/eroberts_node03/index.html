@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>ER M03 Exercise: Arguments/Modules</title>
+    <link rel="stylesheet" href="../../style.css">
+
+    <!--Font Embed-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway&display=swap" rel="stylesheet">
+
+    <!-- Favicon -->
+    <link rel="icon" href="images/house-fontawesome.ico">
+
+    <!-- Code Plugin -->
+    <link href="https://cdn.jsdelivr.net/npm/prismjs/themes/prism.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/prismjs/prism.js"></script>
+</head>
+<body id="code-explanation">
+    <header>
+        <h1><a href="/">Eric's Advanced Web Scripting Workspace</a></h1>
+        <p>Butler Community College Spring 2026</p>
+        <nav>
+            <a href="/">Home</a> &gt; <a href="../../exercise.html">Exercises</a>
+        </nav>
+    </header>
+    <main>
+        <div class="content-div">
+            <h2>Code Explanation</h2>
+            <img src="https://uploads-cdn.omnicalculator.com/images/pythagorean-theorem-calculator/right-triangle-pythagorean-theorem-diagram.png?width=425&enlarge=0&format=jpeg" alt="A picture of the pythagorean theorum formula.">
+            <p>For this exercise, I made a simple script that retrieves user input and calculates the pythagorean theorum.</p>
+            <pre><code class="language-js">"use strict";
+const fs = require('fs');
+</code></pre>
+            <p>
+                <code>use strict</code> enables strict mode which is just good practice to include as it enforces better habits.
+                <br>
+                <code>const fs = require('fs')</code> Just imports the built-in file system module and stores it in a variable.
+            </p>
+            <pre><code class="language-js">const sideA = parseFloat(process.argv[2]);
+const sideB = parseFloat(process.argv[3]);
+
+if(isNaN(sideA) || isNaN(sideB)) {
+    console.log("Error! Please pass valid numbers for all arguments.");
+}</code></pre>
+            <p>
+                Process.argv is an array of command line arguments. Since the path takes up the first two array slots, the actual inputs are placed in
+                <code>[3, 4]</code>.
+                <br>
+                ParseFloat converts the argument from a string into a decimal number.
+                <br>
+                The next line is quick validation to make sure the argument is a valid number. || means if either one fails the check, show the error.
+            </p>
+            <pre><code class="language-js">var sideC2 = Math.pow(sideA, 2) +  Math.pow(sideB, 2);
+var sideC = Math.sqrt(sideC2).toFixed(2);
+</code></pre>
+            <p>
+                The first line raises the values of both side A and side B by the power of two and adds them together. <br>
+                The second line takes the square root from the result above to get the length of the hypotenuse. toFixed rounds the
+                result to two decimal places.
+            </p>
+            <pre><code class="language-js">fs.writeFileSync('./result.txt', `We've made a triangle. Side A is ${sideA} inches long. Side B is ${sideB} inches long.` + '\n' + `This means that Side C needs to be about ${sideC} inches long.` + '\n \-E Roberts');
+
+const message = fs.readFileSync('./result.txt', 'utf8');
+
+console.log(message);</code></pre>
+                <p>
+                    <code>fs.writeFileSync()</code> creates a new file called result.txt writes the following string into it.
+                    <br>
+                    <code>const message = fs.readFileSync()</code> reads the file and stores it inside a variable. The final line just prints this variable to the terminal.
+                </p>
+        </div>
+    </main>
+    <footer>
+        &copy; Eric Roberts 2026
+    </footer>
+</body>
+</html>

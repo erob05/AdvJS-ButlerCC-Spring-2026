@@ -1,0 +1,28 @@
+{
+  "name": "eroberts_m04pack",
+  "version": "1.0.0",
+  "description": "This is my first Node package.",
+  "keywords": [
+    "Lodash",
+    "simple",
+    "first",
+    "package"
+  ],
+  "license": "ISC",
+  "author": "erob05",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "mysass": "sass mystyle.scss mystyle.css",
+    "build": "sass --watch mystyle.scss --style=compressed mystyle.css"
+  },
+  "dependencies": {
+    "lodash": "^4.17.23",
+    "sass": "^1.97.3"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.11"
+  }
+}

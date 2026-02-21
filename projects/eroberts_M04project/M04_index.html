@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ER M04 Project: My Package Server</title>
+    <link rel="stylesheet" href="../../style.css">
+
+    <!--Font Embed-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway&display=swap" rel="stylesheet">
+
+    <!-- Favicon -->
+    <link rel="icon" href="images/house-fontawesome.ico">
+
+    <!-- Code Plugin -->
+    <link href="https://cdn.jsdelivr.net/npm/prismjs/themes/prism.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/prismjs/prism.js"></script>
+</head>
+<body id="code-explanation">
+    <header>
+        <h1><a href="/">Eric's Advanced Web Scripting Workspace</a></h1>
+        <p>Butler Community College Spring 2026</p>
+        <nav>
+            <a href="/">Home</a> &gt; <a href="../../project.html">Projects</a>
+        </nav>
+    </header>
+    <main>
+        <div class="content-div">
+            <h2>Code Explanation</h2>
+            <h3>Introduction</h3>
+            <p>I made a website about nothing using Node and a http server. My first script creates the server but my second script adds some interactivity by allowing user input and displaying
+                a short story based off their choices. Here are screenshots of each page.
+            </p>
+            <img src="images/landing.png" alt="A screenshot of the landing page.">
+            <img src="images/home.png" alt="A screenshot of the home page.">
+            <img src="images/404.png" alt="A screenshot of the 404 page.">
+            <h3>Index.js Explanation</h3>
+            <pre><code class="language-js">const http = require('http');
+const {readFileSync} = require('fs');
+const {generate} = require('./story');
+</code></pre>
+            <p>These all are imports. I imported the http module, file system module, and the generate function from the 'story.js' file.</p>
+            <pre><code class="language-js">const server = http.createServer((req, res) => {
+    const url = req.url;
+});
+server.listen(8080);
+console.log('Server reached at http://localhost:8080/');</code></pre>
+            <p>So here I made a function that creates the web server. The (req, res) are the two arguments that get passed every time someone visits the site.
+                Then, I pulled the url path and stored it in a variable. Finally, I made the server listen on port 8080, then printed a console.log so I know everything is working correctly.
+                <em>Important note: All the code left for index.js is INSIDE the server function so that the code is always running.</em>
+            </p>
+            <pre><code class="language-js">    if (url === '/') {
+        res.writeHead(200, {'content-type': 'text/html'});
+        res.end(readFileSync('./index/index.html'));
+    } else if (url === '/home') {
+        res.writeHead(200, {'content-type': 'text/html'});
+        res.end(readFileSync('./index/home.html'));
+    } else if (url === '/style.css') {
+        res.writeHead(200, {'content-type': 'text/css'});
+        res.end(readFileSync('./index/style.css'));
+    } else {
+        res.writeHead(404, {'content-type': 'text/html'});
+        res.end(readFileSync('./index/404.html'));
+    }</code></pre>
+            <p>
+                This is the actual server logic. If the url ends in <code>'/'</code>, which means theres no directory, the server will display the landing page.
+                <code>res.writeHead(200, {'content-type': 'text/html'})</code> means the server tells the browser there's a 200 code (which means OK) before telling the browser to expect an HTML file.
+                <br><br>
+                <code>res.end(readFileSync('./index/index.html'))</code> means the server reads the HTML file and sends it to the browser before closing the response. It is important to always close the response.
+                <code>else if (url === '/style.css')</code> serves the stylesheet which the HTML files need. The content type is different so the browser knows it's a CSS file.
+                Finally, if the URL doesn't match any of the above, then serve a 404 error code and display the 404 HTML page.
+            </p>
+            <pre><code class="language-js">else if (url === '/story' && req.method === 'POST') {
+        let body = '';
+        req.on('data', chunk => {body+=chunk;});
+        req.on('end', () => {
+            const choices = JSON.parse(body);
+            const result = generate(choices);
+            res.writeHead(200, {'content-type': 'application/json'});
+            res.end(JSON.stringify(result));
+        });
+    }</code></pre>
+            <p>
+                This is the final <code>else if</code> and this one is a bit more tricky. In short, the conditional is checks if the URL is /story and the request must be a POST method.
+                <br><br>
+                The <code>let body</code> statement just creates an empty string to be filled with incoming data.
+                The next line listens for incoming data. The data arrives in chunks from the browser, then each chunk gets stored inside the body variable I made above.
+                <br><br>
+                Now, I made a function that fires off when all the chunks have arrived. The next line converts the string into an array. The next line
+                passes the <code>choices</code> array I just made into the generate function I made in my story.js file. We will get to that later.
+                <br><br>
+                Finally, the next line sends back a 200 success status and tells the browser to start expecting some JSON data back.
+                The final line converts the result from story.js into a JSON string and sends it back to the browser where the HTML displays it.
+                <br><br>
+                Now let's get into the story.js file.
+            </p>
+            <h3>Story.js Explanation</h3>
+            <pre><code class="language-js">const _ = require('lodash');
+const dayjs = require('dayjs');</code></pre>
+            <p>Here are the first lines of code. These are just assigning my dependencies so I can call them easily.</p>
+            <pre><code class="language-js">const generate = (choices) => {
+    const [char, wep, comp] = choices;
+    const timestamp = dayjs().format('MMMM D, YYYY h:mm A');
+</code></pre>
+            <p>
+                Here's the generate function! The bulk of the code is nested here. It's passing the choices received from the server and
+                formatting them into an array. I also made a timestamp variable using a method from the dayjs dependency.
+            </p>
+            <pre><code class="language-js">    let story = '';
+    let image = '';
+
+    if (char === 'Link' && wep === 'Sword' && comp === 'Companion Cube') {
+        story = 'Link swung his sword valiantly as the companion cube silently hummed. You saved the realm!';
+        image = 'https://static.wikia.nocookie.net/characterprofile/images/a/a1/LinkZelda.png';
+    }</code></pre>
+            <p>
+                Then, I had to create variables holding empty strings so I can fill them depending on where the choices fall in the
+                <code>else if</code> chain. The next line is the first if statement checking if those choices are fulfilled, if they are then they replace
+                the empty strings I created above. I'm not going to explain the rest of the <code>else if</code> chain since it's pretty similar to this.
+            </p>
+            <pre><code class="language-js">else {
+        const fallbacks = [
+            `${char} wielded their ${wep} against the horde. But... it wasn't enough. ${comp} was the first to go. The realm is lost.`,
+            `${char} tried their best with a ${wep} but ${comp} abandoned them in the heat of battle. Tragic.`,
+            `${comp} betrayed ${char} at the worst possible moment. The ${wep} was no match alone. The realm is lost.`,
+        ];
+        story = _.sample(fallbacks)
+        image = 'https://media.tenor.com/HgfzKvP9OeAAAAAM/loser-you-lose.gif';
+    }</code></pre>
+            <p>
+                Here's the last part of the <code>else if</code> chain. This is the fallback incase any of the if statements above are not fulfilled.
+                I used lodash's <code>.sample</code> method to randomly choose an outcome from the fallbacks array.
+            </p>
+            <pre><code class="language-js">    return {
+        story,
+        image,
+        timestamp: `Story generated on ${timestamp}`
+    };
+};
+
+module.exports = {generate};</code></pre>
+            <p>
+                Return sends the specified pieces of data back to whoever called generate(), which in this case the index.js server.
+                <br><br>
+                <code>module.exports = {generate}</code> makes the generate() function available to other files so they can call it.
+            </p>
+        </div>
+    </main>
+    <footer>
+        &copy; Eric Roberts 2026
+    </footer>
+</body>
+</html>

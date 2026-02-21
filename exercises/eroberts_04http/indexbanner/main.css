@@ -1,0 +1,38 @@
+@charset "UTF-8";
+/* CSS Document */
+* {
+	margin: 0.5em;
+	font-family: Helvetica, sans-serif;
+}
+
+header img {
+	display: block;
+	margin: auto;
+}
+
+body {
+	background-color: #E1D2EE;
+}
+
+p {
+	text-indent: 20px;
+}
+
+main {
+	margin: 2em;
+	padding: .5em;
+	background-color: #FFFFFF;
+	border-radius: 25px;
+}
+
+h1, h2 {
+	color: #43225E;
+}
+
+dt {
+	font-weight: bold;
+}
+
+footer {
+	text-align: right;
+}

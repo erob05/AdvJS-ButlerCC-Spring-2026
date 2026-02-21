@@ -1,0 +1,16 @@
+$heroColor: green;
+
+body {
+    font-size: 24px;
+}
+
+h1 {
+    color: $heroColor;
+}
+
+p {
+    color: blue;
+    span {
+        color: red;
+    }
+}

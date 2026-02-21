@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>ER M04 Exercise: A Simple Package</title>
+    <link rel="stylesheet" href="../../style.css">
+
+    <!--Font Embed-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway&display=swap" rel="stylesheet">
+
+    <!-- Favicon -->
+    <link rel="icon" href="images/house-fontawesome.ico">
+
+    <!-- Code Plugin -->
+    <link href="https://cdn.jsdelivr.net/npm/prismjs/themes/prism.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/prismjs/prism.js"></script>
+</head>
+<body id="code-explanation">
+    <header>
+        <h1><a href="/">Eric's Advanced Web Scripting Workspace</a></h1>
+        <p>Butler Community College Spring 2026</p>
+        <nav>
+            <a href="/">Home</a> &gt; <a href="../../exercise.html">Exercises</a>
+        </nav>
+    </header>
+    <main>
+        <div class="content-div">
+            <h2>Code Explanation</h2>
+            <a href="indexbanner/index.html">View the Site</a>
+            <pre><code class="language-js">const http = require('http');
+const {readFileSync} = require('fs');
+// Get files
+const indexpg = readFileSync('./indexbanner/index.html');
+const aboutpg = readFileSync('./indexbanner/about.html');
+const mainsty = readFileSync('./indexbanner/main.css');
+const banimg = readFileSync('./indexbanner/banner_forest.png');</code></pre>
+            <p>The first two lines store the http and file system modules inside variables.</p>
+            <p>The rest of the lines reads each file and stores them in a variable.</p>
+
+            <pre><code class="language-js">const server = http.createServer((req, res)=> {
+    const url = req.url;
+
+    if(url === '/'){
+        res.writeHead(200,{'content-type':'text/html'});
+        res.write(indexpg);
+        res.end();
+    } else if(url === '/main.css') {
+        res.writeHead(200,{'content-type':'text/css'});
+        res.write(mainsty);
+        res.end();
+    } else if(url === '/banner_forest.png') {
+        res.writeHead(200,{'content-type':'image/x-png'});
+        res.write(banimg);
+        res.end();
+    } else if(url === '/about'){
+        res.writeHead(200,{'content-type':'text/html'});
+        res.write(aboutpg);
+        res.end();
+    } else {
+        res.writeHead(404,{'content-type':'text/html'});
+        res.write('<h1>404 Page Not Found</h1>');
+        res.end();
+    }
+});
+
+server.listen(8080);
+console.log('Server reached at http://localhost:8080/');</code></pre>
+            <p>Here's the main server logic. We used the http module to create a server and used the url to pass <code>if else</code> statements. Depending
+            on the URL condition, different HTML pages get sent.</p>
+        </div>
+    </main>
+    <footer>
+        &copy; Eric Roberts 2026
+    </footer>
+</body>
+</html>

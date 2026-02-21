@@ -1,0 +1,16 @@
+{
+  "name": "eroberts_04http",
+  "version": "1.0.0",
+  "description": "",
+  "main": "m04_index.js",
+  "scripts": {
+    "dev": "nodemon m04_index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "nodemon": "^3.1.11"
+  }
+}

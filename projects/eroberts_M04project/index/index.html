@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ER Nothing Site</title>
+    <link rel="stylesheet" href="style.css">
+
+    <!--Font Embed-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <h1>The Nothing Site</h1>
+    </header>
+    <main>
+        <p>Maybe you can venture <a href="/home">further...</a></p>
+        <div>
+            <label>Choose your character:</label>
+            <select id="char">
+                <option>Link</option>
+                <option>Mario</option>
+                <option>Kirby</option>
+            </select>
+            <br>
+            <br>
+            <label>Choose your weapon:</label>
+            <select id="wep">
+                <option>Sword</option>
+                <option>Fireball</option>
+                <option>Crowbar</option>
+            </select>
+            <br>
+            <br>
+            <label>Choose your companion:</label>
+            <select id="comp">
+                <option>Companion Cube</option>
+                <option>Luigi</option>
+                <option>Gordon Freeman</option>
+            </select>
+            <br>
+            <br>
+            <button type="submit" onclick="choices()">Submit</button>
+        </div>
+        <div id="result"></div>
+    </main>
+    <footer>
+    </footer>
+    <script>
+        async function choices() {
+            const choices = [
+                document.getElementById('char').value, 
+                document.getElementById('wep').value, 
+                document.getElementById('comp').value
+            ];
+
+            const res = await fetch('/story', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify(choices)
+            });
+
+            const data = await res.json();
+            document.getElementById('result').innerHTML = `
+                <p>${data.story}</p>
+                <p>${data.timestamp}</p>
+                <img src="${data.image}" alt="character image">
+            `;
+        }
+    </script>
+</body>
+</html>

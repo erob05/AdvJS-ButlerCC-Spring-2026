@@ -1,0 +1,21 @@
+{
+  "name": "first-package-project",
+  "version": "1.0.0",
+  "description": "My first time creating a package with no help.",
+  "license": "ISC",
+  "author": "erob05",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+      "dev": "concurrently \"nodemon --ext js,html,css index.js\" \"node story.js\"",
+      "story": "node story.js"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.11"
+  },
+  "dependencies": {
+    "concurrently": "^9.2.1",
+    "dayjs": "^1.11.19",
+    "lodash": "^4.17.23"
+  }
+}
