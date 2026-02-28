@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eric's NPC Roster</title>
+    <link rel="stylesheet" href="main.css">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quintessential&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <h1>Eric's NPC Roster System</h1>
+        <p>My NPC Codex Registry for Role-playing</p>
+        <p><a href="/">Home</a> &gt; <a href="../../project.html">Projects</a></p>
+    </header>
+    <main>
+        <h1>New Character</h1>
+        <p>Add a new entry to your roster</p>
+        <form id="npcForm">
+            <label for="name">Name</label> <br>
+            <input type="text" id="name" placeholder="Character name"><br><br>
+            <label for="faction">Faction</label><br>
+            <input type="text" id="faction" name="faction" placeholder="Who are they loyal to?"><br><br>
+
+            <label for="relationship">Relationship to Main Character</label><br>
+            <select id="relationship" name="relationship">
+            <option value="unknown">Unknown</option>
+            <option value="ally">Ally</option>
+            <option value="neutral">Neutral</option>
+            <option value="enemy">Enemy</option>
+            <option value="romantic">Romantic Interest</option>
+            </select><br><br>
+
+            <input type="checkbox" id="alive" name="alive" checked>
+            <label for="alive">Character is alive</label><br><br>
+
+            <label for="backstory">Backstory</label><br>
+            <textarea id="backstory" name="backstory" rows="5" cols="40" placeholder="What is their story?"></textarea><br><br>
+
+            <label for="imageUrl">Portrait URL</label><br>
+            <input type="url" id="imgURL" name="imgUrl" placeholder="https://…/portrait.jpg"><br><br>
+
+            <button type="reset">Clear</button>
+            <button type="submit">Save Character</button>
+        </form>
+
+        <br>
+        <hr>
+
+        <div class="card-div">
+            <div class="card" id="rosterCards"></div>
+        </div>
+    </main>
+    <footer>
+        <p>Eric Roberts 2026</p>
+    </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="script.js"></script>
+</body>
+</html>

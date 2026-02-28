@@ -1,0 +1,19 @@
+{
+  "name": "eroberts_m05express",
+  "version": "1.0.0",
+  "description": "This is a package for the express exercise.",
+  "main": "eroberts_app.js",
+  "scripts": {
+    "start": "nodemon eroberts_app.js"
+  },
+  "keywords": [],
+  "author": "erob05",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "express": "^5.2.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14"
+  }
+}
