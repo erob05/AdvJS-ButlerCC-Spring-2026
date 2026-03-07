@@ -45,7 +45,7 @@ $(document).ready( () => {
     $(document).on('click', '.delete-btn', function() {
         const id = $(this).attr('data-id');
         let roster = JSON.parse(localStorage.getItem('npc_roster') || '[]');
-        roster = roster.filter(npc => npc.id !== id);
+        roster = roster.filter(npc => npc.id !== id); // Creates a new array containing all NPCs except the one whose id matches the deleted one
         localStorage.setItem('npc_roster', JSON.stringify(roster));
         loadRoster();
     });
@@ -88,7 +88,7 @@ $(document).ready( () => {
 
         if (editingId) {
             // Replace the existing entry
-            roster = roster.map(n => n.id === editingId ? npc : n);
+            roster = roster.map(n => n.id === editingId ? npc : n); // Loops through each entry to find a matching ID
             editingId = null;
             $('button[type="submit"]').text('Save Character');
         } else {

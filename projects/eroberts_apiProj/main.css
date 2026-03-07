@@ -1,0 +1,99 @@
+body {
+    background-image: url("img/background.jpg");
+    background-size: cover;
+}
+
+h1, h2, h3, h4 {
+    font-family: "Cinzel Decorative", serif;
+    font-weight: 400;
+    color: white;
+    text-shadow: 2px 2px 4px #000000;
+}
+
+p {
+    font-family: "Exo 2", sans-serif;
+}
+
+header {
+    text-align: center;
+
+    a {
+        color: white;
+        font-family: "Cinzel Decorative", serif;
+        text-shadow: 2px 2px 4px #000000;
+
+        &:hover {
+            color: rgb(224, 224, 224);
+        }
+    }
+}
+
+.center {
+    text-align: center;
+}
+
+.div {
+    background-color: #937833;
+    margin-left: 35%;
+    margin-right: 35%;
+    margin-top: 10px;
+    padding: 10px;
+    color: #e8d08a;
+    border: 5px solid #e8d08a;
+    border-radius: 1%;
+
+    h1, h2, h3, h4 {
+        color: #e8d08a;
+        text-align: center;
+    }
+
+    .expac {
+        width: 200px;
+        height: 100px;
+    }
+
+    #img {
+        margin: auto;
+        display: block;
+    }
+
+    p, .expac {
+        padding-left: 3%;
+        padding-right: 3%;
+    }
+
+    @media (max-width: 768px) {
+        margin: 0;
+    }
+}
+
+button {
+    margin: 5px;
+    margin-top: 0;
+
+    background: linear-gradient(135deg, #c8a84b, #e8d08a);
+    color: #1a1200;
+    border: none;
+    padding: 0.6rem 1.4rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    font-family: "Cinzel Decorative", serif;
+
+    &:hover {
+        background: linear-gradient(135deg, #e8d08a, #c8a84b);
+    }
+}
+
+#margin {
+    margin-bottom: 5px;
+}
+
+footer {
+    color: white;
+    text-shadow: 2px 2px 4px #000000;
+}
+
+.hide {
+    display: none;
+}

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>ER API Intro</title>
+
+    <script src="https://code.jquery.com/jquery-3.6.4.slim.js" integrity="sha256-dWvV84T6BhzO4vG6gWhsWVKVoa4lVmLnpBOZh/CAHU4=" crossorigin="anonymous"></script>
+
+    <script src="script.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header>
+        <h1>Poke API</h1>
+        <div class="choices">
+        <button id="poke01" type="button" value="charmander">Charmander</button>
+        <button id="poke02" type="button" value="bulbasaur">Bulbasaur</button>
+        <button id="poke03" type="button" value="squirtle">Squirtle</button>
+        </div>
+    </header>
+    <main>
+        <h2 id="pokeTitle">Pick A 'Mon</h2>
+        <h3 id="types">Pick a starter from the three above</h3>
+        <div id="content" class="hide">
+            <p><b>Description: </b><span id="pokedesc"></span></p>
+            <div class="myrow">
+                <div class="block">
+                    <img class="poke" src="" alt="">
+                </div>
+                <div class="mycell">
+                    <h2>First Move Set</h2>
+            <p id="moves"></p>
+                </div>
+            </div>
+            <hr>
+            <h2>Abilities</h2>
+            <div id="abil01"></div>
+            <div id="abil02"></div>
+        </div>
+    </main>
+    <footer>Completed by eroberts 2026</footer>
+</body>
+</html>
