@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Tutorial</title>
+    <link type="text/css" rel="stylesheet" href="tutorial.css">
+	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+</head>
+<body>
+  <main>
+    <h1>Here is a pretty, pretty picture!</h1> 
+    <img src="images/flower_1920.jpg" alt="flowers on a branch" />
+    <p class="attribution">Image from <a href="https://pixabay.com/" target="_blank">pixabay.com</a></p>
+    <input type="button" id="back" value="Back">
+	Number of pages in history: 
+<script>
+  document.write(history.length);
+  $('#back').click(() => { history.back(); })
+</script>
+</main>
+</body>
+</html>

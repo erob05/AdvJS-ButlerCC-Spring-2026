@@ -1,0 +1,36 @@
+@charset "utf-8";
+/* CSS Document */
+* {
+	margin: 0;
+}
+/*parallax-window code*/
+.parallax-window {
+    min-height: 600px;
+    background: transparent;
+}
+body {
+	font-family: "aglet-slab-variable", sans-serif;
+	font-variation-settings: "wght" 400;
+	font-size: 16px;
+}
+section {
+	padding: 20px;
+}
+h1, h2 {
+	color: #43215F;
+}
+p{
+	margin-bottom: 20px;
+	text-indent: 15px;
+}
+.btn {
+	padding: 10px;
+	margin: 5px;
+	border-radius: 15px;
+	text-decoration: none;
+	background-color: #43215F;
+	color: white;
+}
+.btn:hover {
+	background-color: #A29061;
+}

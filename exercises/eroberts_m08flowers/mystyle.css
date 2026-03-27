@@ -1,0 +1,100 @@
+@charset "utf-8";
+/* CSS Document */
+* {
+	margin: 0;
+	padding: 0;	
+}
+
+body {
+	font-family: "aglet-slab-variable", sans-serif;
+	font-variation-settings: "wght" 400;
+	font-size: 16px;
+	
+}
+header {
+	display: flex;
+	background-image: url("images/flower_1920.jpg");
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-color: #641F2A;
+/*	width: auto;*/
+	height: 100vh;
+	align-items: center;
+	justify-content: center;
+}
+header h1{
+	padding: 50px;
+	font-size: 5em;
+	text-align: center;
+	color: white;
+	text-shadow: 5px 5px 1px rgba(140,32,83,0.7);
+}
+.boxit {
+	width: 600px;
+	padding: 40px;
+	color: white;
+	background-color: #8C2053;
+}
+
+#second {
+	position: relative;
+	width: auto;
+	height: 40vh;
+	background-color: #8C2053;
+}
+
+.square {
+	width: 0px;
+	height: 10px;
+	background: white;
+}
+
+.content {
+	position: relative;
+	top: 200px;
+	display: none;
+	box-sizing: content-box;
+	padding: 30px;
+	color: white;
+}
+
+.content h2 {
+	padding: 10px;
+	font-size: 2em;
+	border-left: #5B8900 solid 5px;
+	border-bottom: #5B8900 solid 10px;
+}
+
+.content p {
+	margin: 10px;
+	text-indent: 20px;
+}
+
+footer {
+	float: right;
+}
+
+#peeka {
+	position: absolute;
+	right: 0px;
+	width: 100%;
+	height: 20px;
+	padding: 10px;
+	text-align: right;
+	background: #3E3E1A;
+	color: white;
+	z-index: 2;
+}
+
+#boo {
+	position: absolute;
+	right: 0px;
+	width: 100px;
+	height: 20px;
+	padding: 10px;
+	text-align: right;
+	font-weight: bold;
+	background: #ECBBB3;
+	color: #641F2A;
+	z-index: 1;
+}
