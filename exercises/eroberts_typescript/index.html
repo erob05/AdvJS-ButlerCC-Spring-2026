@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ER M09 Exercise: Typescript</title>
+    <link rel="stylesheet" href="style.css">
+
+    <!--Font Embed-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway&display=swap" rel="stylesheet">
+
+    <!-- Favicon -->
+    <link rel="icon" href="images/house-fontawesome.ico">
+
+    <!-- Code Plugin -->
+    <link href="https://cdn.jsdelivr.net/npm/prismjs/themes/prism.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/prismjs/prism.js"></script>
+</head>
+<body id="code-explanation">
+    <header>
+        <h1><a href="/">Eric's Advanced Web Scripting Workspace</a></h1>
+        <p>Butler Community College Spring 2026</p>
+        <nav>
+            <a href="/">Home</a> &gt; <a href="../../exercise.html">Exercises</a>
+        </nav>
+    </header>
+    <main>
+        <div class="content-div">
+            <h2>Code Explanation</h2>
+            <p>This code sets up some inventory items and a buy() function checks if they're in stock and returns the remaining quantity.</p>
+            <pre><code class="language-js">let sport = 'football';
+// let id = 5;
+let id:number;
+id = 5;
+let confirmed: string | boolean = 'yes';
+confirmed = true;</code></pre>
+            <p>
+                We are setting variables here by declaring the types before giving them values. The first line just simply assigns the string 'football' to the variable 'sport'.
+                The second line is a comment. The third line declares id to be a number type before declaring id = 5. The next line declares 'confirmed' as both string and boolean, initially assigning the string
+                'yes' to it. The final line redeclares 'confirmed' to be true which is a <b>boolean</b>.
+            </p>
+            <pre><code class="language-js">type myAlias = string | number;</code></pre>
+            <p>
+                This line creates a reusable data type called an alias. 'myAlias' now represents either a string or a number.
+            </p>
+            <pre><code class="language-js">type itemObj = {
+    title: string;
+    serial: myAlias;
+    inventory: number;
+}</code></pre>
+            <p>
+                This creates an object template. We're declaring the data types we want in our item objects before declaring the actual data.
+            </p>
+            <pre><code class="language-js">const itemA: itemObj = {
+    title: 'Box',
+    serial: 234,
+    inventory: 4
+};
+
+const itemB: itemObj = {
+    title: 'Bowl',
+    serial: '2er45',
+    inventory: 3
+};</code></pre>
+            <p>
+                This creates our actual objects. If we declare data that doesn't follow our object template then the code wouldn't work. The template saves time from debugging by using strict type rules.
+            </p>
+            <pre><code class="language-js">function buy(cart: number, item: string) {
+    let theMess: string;
+    if (item == 'a' || item == 'A') {
+        if (cart > itemA.inventory) {
+            theMess = `You can't buy that many of the ${itemA.title}`;
+        } else {
+            theMess = `There are ${itemA.inventory-cart} of ${itemA.title}`;
+        }
+    } else {
+        if (cart > itemB.inventory) {
+            theMess = `You can't buy that many of the ${itemB.title}`;
+        } else {
+            theMess = `There are ${itemB.inventory-cart} of ${itemB.title}`;
+        }
+    }
+    return theMess;
+};
+console.log(buy(2, 'B'));</code></pre>
+            <p>
+                This function checks whether you can buy a certain number of items and returns a message about the remaining inventory. It looks at the item parameter to decide between item A or B, compares
+                the requested cart quantity and either says you can't buy that many or tell you how many would be left.
+            </p>
+            <pre><code class="language-js">let person = [false, 'John', 'Plumber'];
+person[0] = true;
+console.log(`${person[1]} is a ${person[2]}`);</code></pre>
+                <p>
+                    This creates an array called person with three values: a boolean, a name, and a job. Then it changes the first value from false to true, and logs a sentence using the second and third values.
+                </p>
+            <pre><code class="language-js">console.log(id);</code></pre>
+                <p>
+                    This simply logs to the console our id variable above. So, it would display the number 5 to the console.
+                </p>
+            <pre><code class="language-js">let origValue = {val01: 1, val02: 2};
+let refPoint = origValue.val02;</code></pre>
+                <p>
+                    This creates an object origValue with two properties, val01 and val02. Then it reads the value of val02 and stores it in a new variable called refPoint.
+                </p>
+            <pre><code class="language-js">if (origValue.val01 == refPoint) {
+    console.log('They\'re equal.');
+} else {
+    console.log('Not even close.');
+}</code></pre>
+                <p>
+                    This code compares origValue.val01 with refPoint. If they have the same value, it prints "They're equal."; otherwise, it prints "Not even close.".
+                    Since we declared earlier that origValue.val01 = 1 and refPoint = 2, the condition is false so the output is going to be "Not even close.".
+                </p>
+        </div>
+    </main>
+    <footer>&copy; Eric Roberts 2026</footer>
+</body>
+</html>

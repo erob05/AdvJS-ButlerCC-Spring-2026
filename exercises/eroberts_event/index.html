@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ER M08 Exercise: Event</title>
+    <link rel="stylesheet" href="style.css">
+
+    <!--Font Embed-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway&display=swap" rel="stylesheet">
+
+    <!-- Favicon -->
+    <link rel="icon" href="images/house-fontawesome.ico">
+
+    <!-- Code Plugin -->
+    <link href="https://cdn.jsdelivr.net/npm/prismjs/themes/prism.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/prismjs/prism.js"></script>
+</head>
+<body id="code-explanation">
+    <header>
+        <h1><a href="/">Eric's Advanced Web Scripting Workspace</a></h1>
+        <p>Butler Community College Spring 2026</p>
+        <nav>
+            <a href="/">Home</a> &gt; <a href="../../exercise.html">Exercises</a>
+        </nav>
+    </header>
+    <main>
+        <div class="content-div">
+            <h2>Code Explanation</h2>
+            <p>We made a simple eventEmitter that reads input from the command line and executes code to change that value.</p>
+            <pre><code class="language-js">const eventEmitter = require('events');
+const customEmitter = new eventEmitter();
+const readline = require('readline');
+const rl = readline.createInterface(process.stdin, process.stdout);</code></pre>
+            <p>
+                These are just variable declarations to call in modules that we need from Node.
+                The first line calls in the events module and assigns it eventEmitter(). From there we can make
+                a new eventEmitter called customEmitter to edit. The next line calls in the readline module and rl modifies readline
+                to accept input from the console.
+            </p>
+            <pre><code class="language-js">customEmitter.on('mess', (radius) => {
+    if (isNaN(radius)) {
+        console.log('Sorry, couldn\'t figure out the circumference. Please enter a real number next time.');
+    } else {
+    let circRaw = 2 * Math.PI * radius;
+    let circ = circRaw.toFixed(2);
+    console.log(`The circumference is ${circ} units.`);
+}
+});
+</code></pre>
+            <p>
+                The first line creates a listener that waits for an event called 'mess' to be fired and receives 'radius' as an argument.
+                'if (isNan(radius))' is a quick validation check. If they input a string instead of a number then it will return an error message.
+                Then we create a new variable called circRaw that holds the values of 2 times Pi times the radius argument.
+                Then we create a circ variable that rounds up circRaw to two decimal places.
+                Finally, we make a message that displays our new modified value in the console.
+            </p>
+            <pre><code class="language-js">customEmitter.on('mess', () => {
+    // console.log('Data received.');
+    rl.question('What?', (ans) => {
+        console.log('Data received.');
+        console.log(`Your answer is ${ans}.`);
+        rl.close();
+    })
+});</code></pre>
+            <p>
+                The line is similar to the first line above. It listens for an event called 'mess' to be fired. Unlike before, it doesn't pass a parameter.
+                The second line is commented out.
+                The third line uses our rl variable from earlier to queue a question to the console. It waits for input and assigns it to an 'ans' variable.
+                After getting an answer back, the console write "Data received. Your answer is (user input)."
+                Finally, it closes the readline to close the query.
+            </p>
+            <pre><code class="language-js">customEmitter.emit('mess', 27);</code></pre>
+            <p>This line fires the 'mess' event and passes 27 as an argument. So, 27 would fill the radius variable in the first customEmitter above.</p>
+        </div>
+    </main>
+    <footer>&copy; Eric Roberts 2026</footer>
+</body>
+</html>
