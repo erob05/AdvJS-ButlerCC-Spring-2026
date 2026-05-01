@@ -1,0 +1,9 @@
+.main-content {
+    background-color: var(--main-color);
+    padding: 1rem;
+
+    .error-message button {
+        margin-left: 10px;
+        padding: 5px 10px;
+    }
+}
