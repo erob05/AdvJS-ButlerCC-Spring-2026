@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ER M13 Exercise: Mid to Route</title>
+    <link rel="stylesheet" href="style.css">
+
+    <!--Font Embed-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway&display=swap" rel="stylesheet">
+
+    <!-- Favicon -->
+    <link rel="icon" href="images/house-fontawesome.ico">
+
+    <!-- Code Plugin -->
+    <link href="https://cdn.jsdelivr.net/npm/prismjs/themes/prism.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/prismjs/prism.js"></script>
+</head>
+<body id="code-explanation">
+    <header>
+        <h1><a href="/">Eric's Advanced Web Scripting Workspace</a></h1>
+        <p>Butler Community College Spring 2026</p>
+        <nav>
+            <a href="/">Home</a> &gt; <a href="../../exercise.html">Exercises</a>
+        </nav>
+    </header>
+    <main>
+        <div class="content-div">
+            <h2>Code Explanation</h2>
+            <p>For this exercise I created an Express server with multiple routes with MVC architecture.</p>
+            <pre><code class="language-js">const items = [
+    {
+        id: 1,
+        name: 'paper',
+        common: 1,
+        strength: 'rock',
+        weakness: 'scissors',
+        fingers: 5,
+        elem: 'wood',
+        desc: 'A flat material best used for wrapping opponents.',
+    },
+    {
+        id: 2,
+        name: 'rock',
+        common: 1,
+        strength: 'scissors',
+        weakness: 'paper',
+        fingers: 0,
+        elem: 'earth',
+        desc: 'A bulky object capable of crushing but not piercing.',
+    },
+    {
+        id: 3,
+        name: 'scissors',
+        common: 1,
+        strength: 'paper',
+        weakness: 'rock',
+        fingers: 2,
+        elem: 'metal',
+        desc: 'A very sharp tool capable of slicing fibers.',
+    },
+    {
+        id: 4,
+        name: 'cleaver',
+        common: 2,
+        strength: 'paper',
+        weakness: 'rock',
+        fingers: 4,
+        elem: 'metal',
+        desc: 'A heavy, bladed weapon meant for slicing.'
+    }
+]
+module.exports = {items}</code></pre>
+    <p>Here's the API I was using for this exercise.</p>
+    <pre><code class="language-js">const express = require('express');
+const app = express();
+const dater = require('./dater');</code></pre>
+        <p>
+            This is index.js in the root folder. The first two lines call in express so I can make a server easily.
+            The third line calls in my dater.js file. Here's what inside dater.js:
+        </p>
+        <pre><code class="language-js">const dater = (req, res, next) => {
+    const today = new Date(); // creates Date object
+    const yyyy = today.getFullYear(); // assigns the getFullYear property from the Date object to 'yyyy'
+    let mm = today.getMonth() + 1; // assigns the getMonth property to the Date object and adds 1 since months start at 0
+    let dd = today.getDate(); // assigns the getDate property to dd
+
+    if (dd < 10) dd = '0' + dd; // if dd is a single digit, add a leading zero
+    if (mm < 10) mm = '0' + mm; // if mm is a single digit, add a leading zero
+
+    req.formattedToday = mm + '/' + dd + '/' + yyyy; // forms the date and sends as it as part of the request object (I changed it to mm/dd/yyyy)
+    next();
+}
+
+module.exports = dater;</code></pre>
+        <p>
+            This code uses the built-in Date object to grab dynamic data. It makes a quick check to see if the day/month is a single digit, if so it adds a leading zero.
+            Then, it formats it all together and exports the dater function.
+        </p>
+        <pre><code class="language-js">const logger = require('./logger');</code></pre>
+        <p>
+            This line requires the logger.js file. Here what's inside logger.js:
+        </p>
+        <pre><code class="language-js">// first middleware function
+const logger = (req, res, next)=>{
+    console.log("Logged."); // writes 'Logged' in the console
+    next(); // tells the server to move on to the next middleware function
+}
+
+module.exports = logger;</code></pre>
+        <p>
+            This is another middleware function that logs a string in the console and tell the program to move on.
+        </p>
+        <pre><code class="language-js">const info = require('./routes/routeInfo');</code></pre>
+        <p>
+            This line requires the routeInfo file thats stored inside the routes folder. Here's what inside routeInfo.js:
+        </p>
+        <pre><code class="language-js">const express = require('express');
+const router = express.Router();
+const {getInfo, selectSingle} = require('../controller/infoCon');
+
+router.get('/',getInfo);
+router.get('/:id',selectSingle);
+
+module.exports = router;</code></pre>
+        <p>
+            This is route file. It'll connect the info and info/:id URLs to controller functions. Here are the controller functions
+            inside the infoCon.js file:
+        </p>
+        <pre><code class="language-js">const {items} = require('../data');
+
+const getInfo = (req,res)=> {
+    res.status(200).json({items});
+    res.end;
+};
+
+const selectSingle = (req,res)=> {
+    const {id} = req.params;
+    const singleItem = items.find((item) => item.id === Number(id));
+    res.json(singleItem);
+};
+
+module.exports = { getInfo, selectSingle };</code></pre>
+        <p>
+            This imports the API and getInfo returns all items from the API. selectSingle returns one item based on the id in the URL.
+            Finally, it exports both functions.
+        </p>
+        <pre><code class="language-js">app.use(dater);
+app.use('/info', info);
+
+// Routes
+app.get('/', dater, logger, (req,res)=>{
+    //res.status(200).send('Home');
+    return res.status(200).send(`Welcome! Today's date is ${req.formattedToday}.`);
+    res.end;
+});
+
+app.listen(8080,()=>{
+    console.log('Server running at http://localhost:8080/');
+});</code></pre>
+        <p>
+            The first two lines uses the dater.js middleware function and info routes.
+            The next line defines the homepage route. It'll fire off the dater.js and logger.js middleware functions
+            before sending the string containing today's date to the page. Finally, the last line starts the server on port 8080.
+        </p>
+    </main>
+    <footer>&copy; Eric Roberts 2026</footer>
+</body>
+</html>
