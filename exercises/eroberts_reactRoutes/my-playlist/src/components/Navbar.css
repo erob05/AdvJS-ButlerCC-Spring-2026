@@ -1,0 +1,61 @@
+:root {
+    --nav-bg: black;
+    --nav-color: white;
+}
+
+.navbar {
+    position: relative;
+    background-color: var(--nav-bg); 
+    color: var(--nav-color);
+    text-align: left;
+}
+
+.nav-menu {
+    display: none;  /* Initially hidden */
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: var(--nav-bg); 
+    & a {
+        display: block;
+        padding: 0.25em 1em;
+        margin: 0.25em;
+        text-decoration: none;
+        color: var(--nav-color);
+        font-weight: bold;
+        &.active {
+            background-color: var(--nav-color);  /* reverse colors */
+            color: var(--nav-bg);
+            border-radius: 4px;
+            &:hover { text-decoration: none; }
+        }
+        &:hover { text-decoration: underline; }
+    }
+}
+
+.menu-button {
+    background-color: var(--nav-bg); 
+    color: var(--nav-color);
+    font-size: x-large;
+    padding: 0.25em 0.5em;
+    cursor: pointer;
+    border: none;
+}
+
+.show {
+    display: block;
+}
+
+/* for larger screens */
+@media screen and (min-width:600px) {
+    .nav-menu {
+        position: static;
+        display: flex;
+        justify-content: space-evenly;
+    }
+    
+    .menu-button {
+        display: none;
+    }
+}
